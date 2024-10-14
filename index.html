@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVenture - Sistema de Monitoreo de Autos Eléctricos</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Great+Vibes&display=swap" rel="stylesheet">
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js para gráficos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Barra de Encabezado Superior -->
+    <header>
+        <div class="logo">
+            <i class="fas fa-car-side"></i>
+            <span class="logo-text">EVenture</span>
+        </div>
+        <div class="auth-icon">
+            <i class="fas fa-user-circle" id="loginIcon" title="Iniciar Sesión"></i>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main>
+        <section class="cards-container">
+            <!-- Tarjeta: Estado del Vehículo -->
+            <div class="card">
+                <i class="fas fa-car"></i>
+                <div class="card-content">
+                    <h3>Estado del Vehículo</h3>
+                    <p id="estadoVehiculo">Desconectado</p>
+                </div>
+            </div>
+
+            <!-- Tarjeta: Batería -->
+            <div class="card">
+                <i class="fas fa-battery-half"></i>
+                <div class="card-content">
+                    <h3>Batería</h3>
+                    <p id="estadoBateria">0%</p>
+                </div>
+            </div>
+
+            <!-- Tarjeta: Estaciones de Carga -->
+            <div class="card">
+                <i class="fas fa-charging-station"></i>
+                <div class="card-content">
+                    <h3>Estaciones de Carga</h3>
+                    <button onclick="mostrarEstacionesCarga()">Ver en el Mapa</button>
+                </div>
+            </div>
+
+            <!-- Tarjeta: Mantenimiento -->
+            <div class="card">
+                <i class="fas fa-tools"></i>
+                <div class="card-content">
+                    <h3>Mantenimiento</h3>
+                    <button onclick="mostrarMantenimiento()">Alertas</button>
+                </div>
+            </div>
+
+            <!-- Tarjeta: Carga -->
+            <div class="card">
+                <i class="fas fa-battery-full"></i>
+                <div class="card-content">
+                    <h3>Carga</h3>
+                    <button onclick="mostrarCarga()">Ver Estado</button>
+                </div>
+            </div>
+
+            <!-- Tarjeta: Consumo de Energía -->
+            <div class="card">
+                <i class="fas fa-bolt"></i>
+                <div class="card-content">
+                    <h3>Consumo de Energía</h3>
+                    <button onclick="mostrarConsumoEnergia()">Analizar</button>
+                </div>
+            </div>
+
+            <!-- Tarjeta: Recorridos -->
+            <div class="card">
+                <i class="fas fa-route"></i>
+                <div class="card-content">
+                    <h3>Recorridos</h3>
+                    <button onclick="mostrarRecorridos()">Ver Historial</button>
+                </div>
+            </div>
+
+            <!-- Tarjeta: Consejos de Eficiencia -->
+            <div class="card">
+                <i class="fas fa-lightbulb"></i>
+                <div class="card-content">
+                    <h3>Consejos de Eficiencia</h3>
+                    <button onclick="mostrarConsejos()">Ver Consejos</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección: Estaciones de Carga en el Mapa -->
+        <section id="mapSection" class="hidden">
+            <h2>Estaciones de Carga Cercanas</h2>
+            <div id="map">
+                <!-- Google Maps Embed -->
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.906627077368!2d-99.13317868472918!3d19.432607686917506!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f3f09e3c6d21%3A0x6c5d6a8d7f3c1b0!2sElectric%20Vehicle%20Charging%20Stations!5e0!3m2!1ses!2smx!4v1617199184567!5m2!1ses!2smx"
+                    width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </section>
+
+        <!-- Sección: Alertas de Mantenimiento -->
+        <section id="maintenanceSection" class="hidden">
+            <h2>Alertas de Mantenimiento</h2>
+            <div class="alert-box" id="alertBox">
+                <p>No hay alertas de mantenimiento pendientes.</p>
+            </div>
+        </section>
+
+        <!-- Sección: Estado de Carga -->
+        <section id="chargeSection" class="hidden">
+            <h2>Estado de Carga</h2>
+            <div class="charging-status">
+                <p id="estadoCarga">Carga actual de la batería: 0%</p>
+            </div>
+        </section>
+
+        <!-- Sección: Consumo de Energía -->
+        <section id="energySection" class="hidden">
+            <h2>Análisis de Consumo de Energía</h2>
+            <canvas id="consumoChart" width="400" height="200"></canvas>
+        </section>
+
+        <!-- Sección: Recorridos Guardados -->
+        <section id="routesSection" class="hidden">
+            <h2>Recorridos Guardados</h2>
+            <div class="routes-list" id="routesList">
+                <p>No hay recorridos guardados.</p>
+            </div>
+        </section>
+
+        <!-- Sección: Consejos de Eficiencia -->
+        <section id="tipsSection" class="hidden">
+            <h2>Consejos para Mejorar la Eficiencia</h2>
+            <div class="tips-list" id="tipsList">
+                <ul>
+                    <li>Mantén una velocidad constante para optimizar el consumo de energía.</li>
+                    <li>Revisa regularmente la presión de los neumáticos.</li>
+                    <li>Utiliza el modo de regeneración de energía durante el frenado.</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal de Autenticación -->
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <!-- Inicio de Sesión -->
+            <div id="loginForm">
+                <h2>Iniciar Sesión</h2>
+                <input type="text" id="usuarioLogin" placeholder="Usuario" required>
+                <input type="password" id="contrasenaLogin" placeholder="Contraseña" required>
+                <div class="button-container">
+                    <button onclick="iniciarSesion()">Iniciar Sesión</button>
+                    <button onclick="mostrarRegistro()">Registrarse</button>
+                </div>
+            </div>
+
+            <!-- Registro -->
+            <div id="registerForm" class="hidden">
+                <h2>Registro</h2>
+                <input type="text" id="usuarioRegistro" placeholder="Usuario" required>
+                <input type="email" id="correoRegistro" placeholder="Correo Electrónico" required>
+                <input type="password" id="contrasenaRegistro" placeholder="Contraseña" required>
+                <input type="password" id="confirmaContrasena" placeholder="Confirmar Contraseña" required>
+                <div class="button-container">
+                    <button onclick="registrarUsuario()">Registrar</button>
+                    <button onclick="volverLogin()">Volver</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2024 EVenture. Todos los derechos reservados.
+    </footer>
+
+    <!-- Scripts JavaScript -->
+    <script src="scripts.js"></script>
+
+</body>
+</html>
