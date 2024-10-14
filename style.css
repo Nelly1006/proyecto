@@ -1,0 +1,391 @@
+/* === Reset CSS === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* === Variables de Colores === */
+:root {
+    --color-principal: #1E90FF; /* Dodger Blue */
+    --color-secundario: #00FA9A; /* Medium Spring Green */
+    --color-terciario: #4682B4; /* Steel Blue */
+    --color-fondo: #F0F8FF; /* Alice Blue */
+    --color-texto: #2F4F4F; /* Dark Slate Gray */
+    --color-texto-secundario: #708090; /* Slate Gray */
+    --color-alerta: #DC143C; /* Crimson */
+    --color-alerta-fondo: #FFE6E6; /* Light Red */
+    --color-footer: #FFFFFF; /* White */
+    --color-boton-hover: #00CED1; /* Dark Turquoise */
+    --color-boton-active: #1E90FF; /* Dodger Blue */
+}
+
+/* === Tipografía y Body === */
+body {
+    font-family: 'Roboto', sans-serif;
+    background: var(--color-fondo);
+    color: var(--color-texto);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* === Encabezado Superior === */
+header {
+    width: 100%;
+    background: var(--color-terciario); /* Steel Blue */
+    color: #FFFFFF;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header .logo {
+    display: flex;
+    align-items: center;
+    font-size: 1.8em;
+    font-family: 'Great Vibes', cursive; /* Fuente cursiva elegante */
+    cursor: pointer;
+}
+
+header .logo i {
+    margin-right: 10px;
+    color: var(--color-secundario); /* Medium Spring Green para el logo */
+}
+
+header .logo-text {
+    font-style: italic; /* Texto en cursiva */
+    font-weight: 400; /* Peso de fuente para elegancia */
+}
+
+header .auth-icon {
+    font-size: 1.8em;
+    cursor: pointer;
+    transition: color 0.3s;
+    color: var(--color-principal); /* Dodger Blue para el ícono de usuario */
+}
+
+header .auth-icon:hover {
+    color: var(--color-boton-hover); /* Dark Turquoise al pasar el cursor */
+}
+
+/* === Contenido Principal === */
+main {
+    flex: 1;
+    padding: 100px 30px 30px 30px; /* Padding superior para el header fijo */
+}
+
+/* === Tarjetas === */
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: #FFFFFF; /* Blanco para las tarjetas */
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+.card i {
+    font-size: 2.5em;
+    color: var(--color-principal); /* Dodger Blue para iconos */
+    margin-bottom: 15px;
+}
+
+.card-content {
+    text-align: center;
+}
+
+.card-content h3 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.4em;
+    margin-bottom: 10px;
+    color: var(--color-texto); /* Dark Slate Gray para títulos */
+}
+
+.card-content p {
+    font-size: 1em;
+    color: var(--color-texto-secundario); /* Slate Gray para texto secundario */
+    margin-bottom: 15px;
+}
+
+/* === Botones con Animaciones Modernas === */
+.card-content button {
+    background: linear-gradient(45deg, var(--color-principal), var(--color-secundario)); /* Degradado azul y verde */
+    color: #FFFFFF;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-content button:hover {
+    transform: scale(1.05); /* Escala al pasar el cursor */
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    background: linear-gradient(45deg, var(--color-boton-hover), var(--color-secundario)); /* Cambio de degradado al hover */
+}
+
+.card-content button:active {
+    transform: scale(0.98); /* Escala al hacer clic */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    background: linear-gradient(45deg, var(--color-boton-active), var(--color-secundario)); /* Cambio de degradado al active */
+}
+
+/* === Sección de Mapa === */
+#mapSection {
+    margin-top: 30px;
+}
+
+#mapSection h2 {
+    font-family: 'Roboto', sans-serif;
+    color: var(--color-texto);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#map {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* === Alert Boxes === */
+.alert-box {
+    background: var(--color-alerta-fondo); /* Light Red */
+    color: var(--color-alerta); /* Crimson */
+    border: 1px solid var(--color-alerta);
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* === Carga y Consumo === */
+.charging-status, .consumption-chart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* === Consumo de Energía - Gráfico === */
+#consumoChart {
+    max-width: 800px;
+    width: 100%;
+    background: #FFFFFF; /* Fondo blanco para el gráfico */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* === Recorridos === */
+.routes-list {
+    background: #FFFFFF;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.routes-list ul {
+    list-style: disc inside;
+    color: var(--color-texto-secundario); /* Slate Gray */
+}
+
+.routes-list ul li {
+    margin-bottom: 10px;
+}
+
+/* === Consejos === */
+.tips-list ul {
+    list-style: disc inside;
+    color: var(--color-texto-secundario); /* Slate Gray */
+}
+
+.tips-list ul li {
+    margin-bottom: 10px;
+}
+
+/* === Modal de Autenticación === */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right:0;
+    bottom:0;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1001;
+}
+
+.modal-content {
+    background: #FFFFFF; /* Fondo blanco para el modal */
+    padding: 25px 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 350px;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.modal-content h2 {
+    font-family: 'Roboto', sans-serif;
+    color: var(--color-texto);
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.modal-content input {
+    width: 100%;
+    padding: 10px 15px;
+    margin: 8px 0;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+    font-size: 0.95em;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.modal-content input::placeholder {
+    color: #999999; /* Placeholder gris */
+}
+
+.modal-content input:focus {
+    border-color: var(--color-secundario); /* Verde mar claro al enfocar */
+    box-shadow: 0 0 5px rgba(32, 178, 170, 0.5);
+    outline: none;
+}
+
+.modal-content .button-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.modal-content button {
+    flex: 1;
+    padding: 8px 10px;
+    background: linear-gradient(45deg, var(--color-principal), var(--color-secundario)); /* Degradado azul y verde */
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.modal-content button:hover {
+    transform: scale(1.05); /* Escala al pasar el cursor */
+    box-shadow: 0 6px 12px rgba(0,102,204,0.2);
+    background: linear-gradient(45deg, var(--color-boton-hover), var(--color-secundario)); /* Cambio de degradado al hover */
+}
+
+.modal-content button:active {
+    transform: scale(0.98); /* Escala al hacer clic */
+    box-shadow: 0 4px 8px rgba(0,102,204,0.15);
+    background: linear-gradient(45deg, var(--color-boton-active), var(--color-secundario)); /* Cambio de degradado al active */
+}
+
+/* === Footer === */
+footer {
+    width: 100%;
+    text-align: center;
+    color: var(--color-texto);
+    font-size: 14px;
+    background: var(--color-footer); /* Blanco para el footer */
+    padding: 15px 0;
+    position: relative;
+    margin-top: auto; /* Para empujar el footer al fondo */
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* === Responsividad === */
+@media (max-width: 768px) {
+    header {
+        padding: 10px 20px;
+    }
+
+    .logo {
+        font-size: 1.5em;
+    }
+
+    .auth-icon {
+        font-size: 1.5em;
+    }
+
+    main {
+        padding: 80px 20px 20px 20px;
+    }
+
+    .cards-container {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+    }
+
+    .card i {
+        font-size: 2em;
+    }
+
+    .card-content h3 {
+        font-size: 1.2em;
+    }
+
+    .card-content button {
+        font-size: 0.8em;
+        padding: 8px 15px;
+    }
+
+    .modal-content {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cards-container {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-content {
+        padding: 15px;
+    }
+
+    .modal-content h2 {
+        font-size: 1.5em;
+    }
+
+    .modal-content input {
+        font-size: 0.9em;
+    }
+
+    .modal-content button {
+        font-size: 0.8em;
+        padding: 8px;
+    }
+}
